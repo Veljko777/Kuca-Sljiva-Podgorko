@@ -96,6 +96,44 @@ app.post("/me", function(req,res,next){
 })
 
 
+app.post("/contactus", function(req,res){
+    var query1=req.body.formValues.name
+    if(req.body.formValues.phone===undefined){
+        var query5=" "
+    }else{
+        var query5=req.body.formValues.phone
+    }
+    var query2=req.body.formValues.email
+    var query3=req.body.formValues.subject
+    var query4=req.body.formValues.description
+    
+    
+    var transporter=nodemailer.createTransport({
+        service:"gmail",
+        secure:false,
+        port:25,
+        auth:{
+            user:"",
+            pass:""
+            },
+        rejectUnauthorized:false
+        })
+    const mailOptions={
+        from:"",
+        to:"veljkorankovic@gmail.com",
+        subject:query3,      
+        html:"<h2>"+query3+"</h2>"+ "<p>"+query4+"</p>"+"<br><h3>"+query1+"</h3>"+"<h4>Email pošiljaoca: "+query2+"</h4>"+"<h4>Telefon: "+query5
+        }
+    transporter.sendMail(mailOptions,function(err,info){
+        if(err)
+        console.log(err)
+        else
+        console.log(info)
+    })
+    res.send("poruka poslata")
+})
+
+
 
 app.listen(3001, function(){
     console.log("SERVER STARTED!!!!!!")

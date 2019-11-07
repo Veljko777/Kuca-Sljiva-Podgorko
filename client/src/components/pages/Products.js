@@ -1,51 +1,25 @@
 import React from "react";
-import {connect} from "react-redux"
-import {signIn} from "../../actions"
 import {Link} from "react-router-dom"
-
+import Header from "./header"
+import Footer from "./footer"
 
 class Products extends React.Component{
-    componentDidMount(){
-        const token=localStorage.getItem("token")
-         this.props.signIn(token) 
-    }
-    logOut(){
-        localStorage.removeItem("token")
-        
-    }
-    isLoggedIn(){
-        if(this.props.user.isSignedIn===true){
-            return(
-                <div className="float-right account-header pr-2">
-                    <Link to="/" onClick={this.logOut}>Log out</Link>
-                </div>
-            )
-        }else{
-            return(
-                <div className="float-right account-header pr-2">
-                    <Link  to="/login">Ulogujte se |</Link>
-                    <Link to="/createaccount">Kreirajte nalog </Link>
-                </div>
-            )
-        }
-    }
-
-
+    
     render(){
         return (
             <div className="wrapper">
-                <div>{this.isLoggedIn()}</div>
+                <Header/>
                 <div className="logo ">
-                    <h1 className="p-0 m-0 pl-2 ">Podgorko</h1>
+                    <Link to="/" className="p-0 m-0 pl-2">Podgorko</Link>
                     <p className="p-0 m-0 pl-4">Savršen ukus prirode</p>
                 </div>
-               <div className="body mb-5">
+               <div className="body container">
                    <nav className="navbar navbar-expand-lg navbar-dark ">
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse " id="navbarSupportedContent">
-                            <ul className="navbar-nav mr-auto">
+                            <ul className="navbar-nav mr-auto" id="nav">
                             <li className="nav-item ">
                                 <Link className="nav-link"  to="/">Početna</Link>
                             </li>
@@ -56,22 +30,27 @@ class Products extends React.Component{
                                 <Link className="nav-link" id="active" to="/products">Proizvodi</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/">Recepti</Link>
+                                <Link className="nav-link" to="/recipes">Recepti</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/">Novosti</Link>
+                                <Link className="nav-link" to="/news">Novosti</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/">Kontakt</Link>
+                                <Link className="nav-link" to="/contact">Kontakt</Link>
                             </li>
                             </ul>
-                            <form className="form-inline my-2 my-lg-0">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </form>
+                            
                        </div>
+                       <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x shop-icon"></i></Link>
                    </nav>
-                   <div>
+                   </div>
+                   <hr className="m-0 p-0"></hr>
+                   <div className="body1 container mb-5 pt-5">
+                   <div className="">
+                   <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                     <h1>Products</h1>
                     <h1>Products</h1>
                     <h1>Products</h1>
@@ -95,30 +74,10 @@ class Products extends React.Component{
                     <h1>Products</h1>
                     </div>
                </div>
-               <footer className="footer">
-                    <div>
-                        <ul className="text-center mb-2">
-                            <Link to="http://www.belfarma.rs" target="_blank"><img src="/images/logo.jpg" className="mb-3 mt-2" id="footer-logo"  alt=""/></Link>
-                            <li><i className="fa fa-phone"></i> +381 69 401 3564</li>
-                            <li><i className="fa fa-user"></i> Snežana Ranković</li>
-                            <li><i className="fa fa-map-marker"></i> Belotić bb, 14 253 Osečina</li>
-                            <li>email: office@belfarma.rs</li>
-                        </ul>
-                    </div>
-                    <div className="text-right pr-2 footerend">
-                        <p className="mb-0">&copy; 2019. Belfarma. Sva prava zadržana</p>
-                    </div>
-                </footer>
-                
+               <Footer/>
             </div>
         )
     }
 }
-const mapStateToProps=(state)=>{
-    return{
-        token:state.user.token,
-        user:state.user
-    };
-}
 
-export default connect(mapStateToProps, {signIn}) (Products);
+export default Products;

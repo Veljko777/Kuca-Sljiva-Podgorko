@@ -3,7 +3,7 @@ import {Link} from  "react-router-dom"
 import Header from "./header"
 import Footer from "./footer"
 
-class MainPage extends React.Component{
+class Cart extends React.Component{
     render(){
         return (
             <div className="wrapper">
@@ -20,7 +20,7 @@ class MainPage extends React.Component{
                         <div className="collapse navbar-collapse " id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto" id="nav">
                             <li className="nav-item ">
-                                <Link className="nav-link" id="active" to="/">Početna</Link>
+                                <Link className="nav-link"  to="/">Početna</Link>
                             </li>
                             <li className="nav-item ">
                                 <Link className="nav-link" to="/about">O nama</Link>
@@ -40,33 +40,33 @@ class MainPage extends React.Component{
                             </ul>
                             
                        </div>
-                       <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x shop-icon"></i></Link>
+                       <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x active-shop-icon" ></i></Link>
                    </nav>
                    </div>
                    <hr className="m-0 p-0"></hr>
                    <div className="body1 container mb-5 pt-5">
                    <div className="">
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
+                    <h1>Cart</h1>
                     </div>
                </div>
                <Footer/>
@@ -75,4 +75,4 @@ class MainPage extends React.Component{
     }
 }
 
-export default MainPage;
+export default Cart;

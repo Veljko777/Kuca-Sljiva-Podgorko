@@ -3,7 +3,7 @@ import {Link} from  "react-router-dom"
 import Header from "./header"
 import Footer from "./footer"
 
-class MainPage extends React.Component{
+class Recipes extends React.Component{
     render(){
         return (
             <div className="wrapper">
@@ -20,7 +20,7 @@ class MainPage extends React.Component{
                         <div className="collapse navbar-collapse " id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto" id="nav">
                             <li className="nav-item ">
-                                <Link className="nav-link" id="active" to="/">Početna</Link>
+                                <Link className="nav-link"  to="/">Početna</Link>
                             </li>
                             <li className="nav-item ">
                                 <Link className="nav-link" to="/about">O nama</Link>
@@ -29,7 +29,7 @@ class MainPage extends React.Component{
                                 <Link className="nav-link" to="/products">Proizvodi</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/recipes">Recepti</Link>
+                                <Link className="nav-link" id="active" to="/recipes">Recepti</Link>
                             </li>
                             <li className="nav-item ">
                                 <Link className="nav-link" to="/news">Novosti</Link>
@@ -46,27 +46,27 @@ class MainPage extends React.Component{
                    <hr className="m-0 p-0"></hr>
                    <div className="body1 container mb-5 pt-5">
                    <div className="">
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
-                    <h1>something</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
+                    <h1>Recepti</h1>
                     </div>
                </div>
                <Footer/>
@@ -75,4 +75,4 @@ class MainPage extends React.Component{
     }
 }
 
-export default MainPage;
+export default Recipes;
