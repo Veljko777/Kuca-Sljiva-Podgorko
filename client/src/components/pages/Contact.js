@@ -7,6 +7,9 @@ import Header from "./header"
 
 
 class Contact extends React.Component{
+    submitForm=(formValues)=>{
+        this.props.submitMessage(formValues);
+    }
     render(){
         return (
             <div className="wrapper">
@@ -16,7 +19,7 @@ class Contact extends React.Component{
                     <p className="p-0 m-0 pl-4">Savršen ukus prirode</p>
                 </div>
                <div className="body container">
-                   <nav className="navbar navbar-expand-lg navbar-dark ">
+                   <nav className="navbar navbar-expand-xl navbar-dark ">
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>

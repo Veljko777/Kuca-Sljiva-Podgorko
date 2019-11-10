@@ -48,7 +48,7 @@ class CreateAccForm extends React.Component{
                     <Field name="phone" component={this.renderInput_text} label="Telefon:"/>
                     <Field name="email" component={this.renderInput_text} label="Email:"/>
                     <Field name="password" component={this.renderPassword} label="Šifra:"/>
-                    <button className="btn btn-primary">Submit</button>
+                    <button className="btn btn-success">Submit</button>
                 </form>
             </div>
         )

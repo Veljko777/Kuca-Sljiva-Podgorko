@@ -44,7 +44,7 @@ class LoginForm extends React.Component{
                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                     <Field name="email" component={this.renderInput_text} label="Email:"/>
                     <Field name="password" component={this.renderPassword} label="Šifra:"/>
-                    <button className="btn btn-primary">Submit</button>
+                    <button className="btn btn-success">Submit</button>
                 </form>
             </div>
         )

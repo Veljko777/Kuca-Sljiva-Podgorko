@@ -3,99 +3,113 @@ const jwt=require("jsonwebtoken")
 const cors = require("cors");
 const bodyParser = require ("body-parser");
 const nodemailer = require ("nodemailer");
-const mongoose=require("mongoose")
-const passport=require("passport")
-const localStrategy=require("passport-local")
 const app=express();
-const User=require("./models/user")
 const cookieParser=require("cookie-parser")
+const mysql=require("mysql");
 
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useFindAndModify", false);
-mongoose.set("useCreateIndex", true)
+
+const users=mysql.createConnection({
+    host:"localhost",
+    user:"root",
+    password:"secret",
+    database:"podgorko",
+    multipleStatements:true
+});
+users.connect((err)=>{
+    if(err){
+        console.log(err);
+    }else{
+        console.log("mySql connected")
+    }
+});
+
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
 const config={
     "secret":"supersecret"
 }
-
 
 app.use(require("express-session")({
     secret:"Dogs are the best pets",
     resave:false,
     saveUninitialized:false
 }));
-mongoose.connect("mongodb://localhost:27017/kuca-sljiva", {useNewUrlParser:true, useUnifiedTopology:true});
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-app.use(function(req,res,next){
-    res.locals.currentUser=req.user;
-    next();
-})
 
-app.get("/", function(req,res){
-    res.send("landing page")
-});
 
 app.post("/createaccount", function(req,res){
     bcrypt.hash(req.body.formValues.password, saltRounds, function(err, hash){
-        const name=req.body.formValues.name
-        const address=req.body.formValues.address
-        const postal_code=req.body.formValues.postal_code
-        const city=req.body.formValues.city
-        const phone=req.body.formValues.phone
-        const email=req.body.formValues.email
-        const newUser=new User({username:name, address, postal_code, city, phone, email, password:hash})
-        User.create(newUser, function(err, newUser){
+        const user={
+            userID:0,
+            username:req.body.formValues.name,
+            address:req.body.formValues.address,
+            postal_code:req.body.formValues.postal_code,
+            city:req.body.formValues.city,
+            phone:req.body.formValues.phone,
+            email:req.body.formValues.email
+                    }
+        const sql="SET @userID=?; SET @username=?; SET @address=?; SET @postal_code=?; SET @city=?; SET @phone=?; SET @email=?; SET @password=?; CALL UserAddOrEdit(@userID,@username,@address,@postal_code,@city,@phone,@email,@password);"
+        users.query(sql,[user.userID, user.username, user.address, user.postal_code, user.city, user.phone, user.email, hash], (err, rows, fields)=>{
+            let response=""
             if(err){
-                console.log(err);
-                res.send(err)
-            }else{
-                res.send("user added to db")
-                
+                if(err.errno===1062){
+                    response="Email already exists"
+                    res.send(response)  }
+                else{
+                    response="something else went wrong"
+                    res.send(response)
+                } 
             }
-        });
-    });
+            else{
+                response="ok"
+                res.send(response);
+                console.log("user created")
+            }
+        })
+    }) 
 });
 
+
 app.post("/login",  function(req,res){
-    User.findOne({"email": req.body.formValues.email},  function(err, user){
-        if(err) return res.status(500).send("Error on the server");
-        if(!user) return res.status(200).send({auth:false,token:null});
-        const passwordIsValid=bcrypt.compareSync(req.body.formValues.password, user.password)
+    users.query("SELECT * FROM users WHERE email=?",[req.body.formValues.email],(err, row, fields)=>{
+        if(err){
+            console.log(err)
+            return res.status(500).send("Error on the server");
+        }if(!row) return res.status(200).send({auth:false,token:null});
+        if(row[0]===undefined)return res.status(200).send({auth:false,token:null});
+        const passwordIsValid=bcrypt.compareSync(req.body.formValues.password, row[0].password)
         if(passwordIsValid) {
-            const token=jwt.sign({id:user._id}, config.secret,{expiresIn:86400});
+            const token=jwt.sign({id:row[0].userID}, config.secret,{expiresIn:86400});
             return res.status(200).send({auth:true, token:token})};
-           
+    
         res.status(200).send({auth:false, token:null})
-    })
-})
-
-
-
-app.post("/me", function(req,res,next){
-    const token=req.body.token
-    const decodedtoken=jwt.decode(token)
-    console.log(decodedtoken)
-    if(!token)return res.status(200).send({auth:false, message:"no token provided"});
-    User.findById(decodedtoken.id,{password:0}, function(err,user){
-            if(err)return res.status(500).send("there was a problem finding the user");
-            if(!user)return res.status(200). send("no user found");
-            res.status(200).send({auth:true, user:user})
         
     })
 })
 
 
+app.post("/me", function(req,res,next){
+    const token=req.body.token
+    if(!token)return res.status(200).send({auth:false, message:"no token provided"});
+    const decodedtoken=jwt.decode(token)
+    users.query("SELECT * FROM users WHERE userID=?", [decodedtoken.id], (err, row, fields)=>{
+        let data={userID:row[0].userID, username:row[0].username, address:row[0].address, 
+            postal_code:row[0].postal_code, city:row[0].city, phone:row[0].phone, email:row[0].email}
+        if(err)return res.status(500).send("there was a problem finding the user");
+        if(!row)return res.status(200).send("no user found");
+        res.status(200).send({auth:true,user:data})
+    })
+})
+
+
+//=====================================
+//ADD USER AND PASS TO TRANSPORTER
+//=====================================
 app.post("/contactus", function(req,res){
     var query1=req.body.formValues.name
     if(req.body.formValues.phone===undefined){
@@ -132,6 +146,9 @@ app.post("/contactus", function(req,res){
     })
     res.send("poruka poslata")
 })
+
+
+
 
 
 

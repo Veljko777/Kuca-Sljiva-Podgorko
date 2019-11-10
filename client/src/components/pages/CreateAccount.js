@@ -2,27 +2,68 @@ import React from "react";
 import CreateAccForm from "./forms/createaccForm";
 import {connect} from "react-redux"
 import {createAccount} from "../../actions"
+import Header from "./header";
+import Footer from "./footer";
+import {Link} from "react-router-dom"
+
 
 
 class CreateAccount extends React.Component{
     onSubmit=(formValues)=>{
         this.props.createAccount(formValues)
+        
     }
     render(){
-        console.log(this.props)
         return(
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-9">
-
-                    </div>
-                    <div className="col-md-3 ">
-                        <h1>Kreiraj nalog</h1>
-                        <CreateAccForm onSubmit={this.onSubmit}/>
-                    </div>
-                    
+            <div className="wrapper">
+                <Header/>
+                <div className="logo ">
+                    <Link to="/" className="p-0 m-0 pl-2">Podgorko</Link>
+                    <p className="p-0 m-0 pl-4">Savršen ukus prirode</p>
                 </div>
-                
+                <div className="body container">
+                   <nav className="navbar navbar-expand-xl navbar-dark ">
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="collapse navbar-collapse " id="navbarSupportedContent">
+                            <ul className="navbar-nav mr-auto" id="nav">
+                            <li className="nav-item ">
+                                <Link className="nav-link"  to="/">Početna</Link>
+                            </li>
+                            <li className="nav-item ">
+                                <Link className="nav-link" to="/about">O nama</Link>
+                            </li>
+                            <li className="nav-item ">
+                                <Link className="nav-link" to="/products">Proizvodi</Link>
+                            </li>
+                            <li className="nav-item ">
+                                <Link className="nav-link" to="/recipes">Recepti</Link>
+                            </li>
+                            <li className="nav-item ">
+                                <Link className="nav-link" to="/news">Novosti</Link>
+                            </li>
+                            <li className="nav-item ">
+                                <Link className="nav-link" to="/contact">Kontakt</Link>
+                            </li>
+                            </ul>
+                       </div>
+                       <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x shop-icon"></i></Link>
+                   </nav>
+                </div>
+                <hr className="m-0 p-0"></hr>
+                <div className="body1 container mb-5 pt-5 pb-5">
+                    <div className="row">
+                        <div className="col-md-9">
+                            <img className="" src="/images/6.jpg" alt="" style={{maxWidth:"100%", borderRadius:"20px"}}></img>
+                        </div>
+                        <div className="col-md-3 ">
+                            <h1>Kreiraj nalog</h1>
+                            <CreateAccForm onSubmit={this.onSubmit}/>
+                        </div>
+                    </div>
+                </div>
+                <Footer/>
             </div>
         )
     }

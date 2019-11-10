@@ -8,8 +8,11 @@ import {SIGN_IN,
 export const createAccount=formValues=>async(dispatch)=>{
         const response=await axios.post("/createaccount", {formValues});
         dispatch({type:CREATE_ACCOUNT, payload:response})
-        history.push("/")
-        
+        if(response.data==="Email already exists"){
+                alert("email already exists")
+        }if(response.data==="ok"){
+                history.push("/login")
+        }
 }
 
 export const findAccount=formValues=>async(dispatch)=>{
@@ -17,7 +20,9 @@ export const findAccount=formValues=>async(dispatch)=>{
         dispatch({type:FIND_ACCOUNT, payload:response.data})
         if(response.data.auth===true){
                 localStorage.setItem("token", response.data.token)
-                history.goBack()
+                history.push("/");
+        }if(response.data.auth===false){
+                alert("email or password was incorrect")
         }
 }
 

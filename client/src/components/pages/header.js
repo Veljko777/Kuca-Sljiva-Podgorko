@@ -17,14 +17,14 @@ class Header extends React.Component{
             return(
                 <div className="float-right account-header pr-2 mt-1">
                     <Link to="/">{this.props.user.user.user.username} </Link>
-                    <Link to="#" id="logout-btn" title="Odjavite se" onClick={this.logOut}><i class="fa fa-sign-out"></i></Link>
+                    <Link to="#" id="logout-btn" title="Odjavite se" onClick={this.logOut}><i className="fa fa-sign-out"></i></Link>
                 </div>
             )
         }else{
             return(
                 <div className="float-right account-header pr-2 mt-1">
-                    <Link id="login-btn" title="Prijavite se" to="/login"><i class="fa fa-user"></i></Link>
-                    <Link id="createaccount-btn" title="Kreirajte nalog" to="/createaccount"><i class="fa fa-user-plus"></i></Link>
+                    <Link id="login-btn" title="Prijavite se" to="/login"><i className="fa fa-user"></i></Link>
+                    <Link id="createaccount-btn" title="Kreirajte nalog" to="/createaccount"><i className="fa fa-user-plus"></i></Link>
                 </div>
             )
         }
