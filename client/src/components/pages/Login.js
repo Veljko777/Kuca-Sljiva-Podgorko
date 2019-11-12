@@ -40,9 +40,6 @@ class Login extends React.Component{
                                 <Link className="nav-link" to="/recipes">Recepti</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/news">Novosti</Link>
-                            </li>
-                            <li className="nav-item ">
                                 <Link className="nav-link" to="/contact">Kontakt</Link>
                             </li>
                             </ul>
@@ -56,7 +53,7 @@ class Login extends React.Component{
                         <div className="col-md-9">
                         </div>
                         <div className="col-md-3 ">
-                            <h1>Log in</h1>
+                            <h1>Uloguj se</h1>
                             <LoginForm onSubmit={this.onSubmit}/>
                         </div>
                     </div>

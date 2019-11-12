@@ -8,14 +8,14 @@ const cookieParser=require("cookie-parser")
 const mysql=require("mysql");
 
 
-const users=mysql.createConnection({
+const db=mysql.createConnection({
     host:"localhost",
     user:"root",
     password:"secret",
     database:"podgorko",
     multipleStatements:true
 });
-users.connect((err)=>{
+db.connect((err)=>{
     if(err){
         console.log(err);
     }else{
@@ -41,8 +41,57 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
+app.get("/products", (req,res)=>{
+    db.query("SELECT * FROM products", (err,rows,fields)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.send(rows)
+        }
+    })
+})
 
-app.post("/createaccount", function(req,res){
+app.get("/products/:id", (req,res)=>{
+    db.query("SELECT * FROM products WHERE productID=?", [req.params.id], (err, rows,fields)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.send(rows[0])
+        }
+    })
+})
+
+app.post("/createcomment", (req,res)=>{
+const comment={
+    ID:0,
+    productID:req.body.productID,
+    raiting:req.body.formValues.raiting,
+    description:req.body.formValues.description,
+    name:req.body.formValues.name
+    }
+    const sql="SET @ID=?; SET @productID=?; SET @raiting=?; SET @description=?; SET @name=?; CALL CreateComment(@ID,@productID,@raiting,@description,@name);"
+    db.query(sql,[comment.ID, comment.productID, comment.raiting, comment.description, comment.name], (err, rows, fields)=>{
+        if(err){
+            let response="Something went wrong"
+            res.send(response)
+        }else{
+            let response="ok"
+            res.send(response)
+            console.log("comment created")
+        }
+    })
+})
+app.get("/comments/:id", (req,res)=>{
+    db.query("SELECT * FROM comments WHERE productID=?", [req.params.id], (err, rows,fields)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.send(rows)
+        }
+    })
+})
+
+app.post("/createaccount", (req,res)=>{
     bcrypt.hash(req.body.formValues.password, saltRounds, function(err, hash){
         const user={
             userID:0,
@@ -54,7 +103,7 @@ app.post("/createaccount", function(req,res){
             email:req.body.formValues.email
                     }
         const sql="SET @userID=?; SET @username=?; SET @address=?; SET @postal_code=?; SET @city=?; SET @phone=?; SET @email=?; SET @password=?; CALL UserAddOrEdit(@userID,@username,@address,@postal_code,@city,@phone,@email,@password);"
-        users.query(sql,[user.userID, user.username, user.address, user.postal_code, user.city, user.phone, user.email, hash], (err, rows, fields)=>{
+        db.query(sql,[user.userID, user.username, user.address, user.postal_code, user.city, user.phone, user.email, hash], (err, rows, fields)=>{
             let response=""
             if(err){
                 if(err.errno===1062){
@@ -75,8 +124,8 @@ app.post("/createaccount", function(req,res){
 });
 
 
-app.post("/login",  function(req,res){
-    users.query("SELECT * FROM users WHERE email=?",[req.body.formValues.email],(err, row, fields)=>{
+app.post("/login",  (req,res)=>{
+    db.query("SELECT * FROM users WHERE email=?",[req.body.formValues.email],(err, row, fields)=>{
         if(err){
             console.log(err)
             return res.status(500).send("Error on the server");
@@ -93,11 +142,11 @@ app.post("/login",  function(req,res){
 })
 
 
-app.post("/me", function(req,res,next){
+app.post("/me", (req,res,next)=>{
     const token=req.body.token
     if(!token)return res.status(200).send({auth:false, message:"no token provided"});
     const decodedtoken=jwt.decode(token)
-    users.query("SELECT * FROM users WHERE userID=?", [decodedtoken.id], (err, row, fields)=>{
+    db.query("SELECT * FROM users WHERE userID=?", [decodedtoken.id], (err, row, fields)=>{
         let data={userID:row[0].userID, username:row[0].username, address:row[0].address, 
             postal_code:row[0].postal_code, city:row[0].city, phone:row[0].phone, email:row[0].email}
         if(err)return res.status(500).send("there was a problem finding the user");
@@ -110,19 +159,19 @@ app.post("/me", function(req,res,next){
 //=====================================
 //ADD USER AND PASS TO TRANSPORTER
 //=====================================
-app.post("/contactus", function(req,res){
-    var query1=req.body.formValues.name
+app.post("/contactus", (req,res)=>{
+    const query1=req.body.formValues.name
     if(req.body.formValues.phone===undefined){
-        var query5=" "
+        const query5=" "
     }else{
-        var query5=req.body.formValues.phone
+        const query5=req.body.formValues.phone
     }
-    var query2=req.body.formValues.email
-    var query3=req.body.formValues.subject
-    var query4=req.body.formValues.description
+    const query2=req.body.formValues.email
+    const query3=req.body.formValues.subject
+    const query4=req.body.formValues.description
     
     
-    var transporter=nodemailer.createTransport({
+    const transporter=nodemailer.createTransport({
         service:"gmail",
         secure:false,
         port:25,
@@ -138,7 +187,7 @@ app.post("/contactus", function(req,res){
         subject:query3,      
         html:"<h2>"+query3+"</h2>"+ "<p>"+query4+"</p>"+"<br><h3>"+query1+"</h3>"+"<h4>Email pošiljaoca: "+query2+"</h4>"+"<h4>Telefon: "+query5
         }
-    transporter.sendMail(mailOptions,function(err,info){
+    transporter.sendMail(mailOptions,(err,info)=>{
         if(err)
         console.log(err)
         else
@@ -152,6 +201,6 @@ app.post("/contactus", function(req,res){
 
 
 
-app.listen(3001, function(){
+app.listen(3001, ()=>{
     console.log("SERVER STARTED!!!!!!")
 })

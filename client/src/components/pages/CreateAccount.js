@@ -41,9 +41,6 @@ class CreateAccount extends React.Component{
                                 <Link className="nav-link" to="/recipes">Recepti</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/news">Novosti</Link>
-                            </li>
-                            <li className="nav-item ">
                                 <Link className="nav-link" to="/contact">Kontakt</Link>
                             </li>
                             </ul>

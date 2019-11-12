@@ -262,7 +262,7 @@ hr{
 .aboutpage{
     padding:15px;
     border-radius: 25px;
-    box-shadow: 0px 0px 15px white;
+    box-shadow: 0px 0px 3px white;
     margin: auto;
     text-align: justify;
     
@@ -292,7 +292,92 @@ hr{
  object-fit: cover;
 }
 
+.product-link h5{
+color:white;
+}
+.product-link img:hover{
+box-shadow:0px 0px 10px white;
+transform: scale(1.05);
+transition: 0.5s;
+}
+.product-link h5:hover{
+text-shadow:0px 0px 10px white;
+transition: 0.5s;
+}
 
+.button{
+    border:none;
+    border-radius: 10px;
+    padding:10px;
+    color:white;
+    background: #1488CC;  
+    background: -webkit-linear-gradient(to top, #2B32B2, #1488CC); 
+    background: linear-gradient(to top, #2B32B2, #1488CC);
+    width: 100%;
+}
+
+.button:hover{
+    background: #1488CC;  
+    background: -webkit-linear-gradient(to bottom, #2B32B2, #1488CC); 
+    background: linear-gradient(to bottom, #2B32B2, #1488CC);
+}
+
+.button:focus {
+    outline: none;
+}
+
+.grid-container{
+    margin:auto;
+    display: inline-grid;
+    display:-moz-inline-grid;
+    display:-ms-inline-grid;
+    grid-template-columns: auto auto auto auto;
+
+
+}
+
+.grid-card{
+    box-shadow: 0px 0px 20px white;
+    max-width: 226px;
+    min-height: 400px;
+    border-radius: 15px;
+    color:white;
+    padding: 5%;
+    margin:15px;
+ 
+}
+.card-img{
+    border-radius: 15px;
+    width: 100%;
+    max-height: 132px; 
+    margin-bottom: 10px;   
+}
+.grid-card h5{
+    height: 60px;
+    
+}
+
+.product-specification{
+    width:80%;
+    padding:20px;
+    box-shadow: 0px 0px 15px white;
+    border-radius: 15px;
+    margin:auto;
+}
+.product-specification img{
+    width:100%;
+    border-radius: 15px;
+}
+.product-specification p{
+    margin: 0px;
+}
+
+.comment-card{
+    box-shadow: 0px 0px 5px white;
+    padding:20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .grid-container{

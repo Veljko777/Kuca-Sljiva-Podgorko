@@ -3,7 +3,11 @@ import history from "../history";
 import {SIGN_IN,
         CREATE_ACCOUNT,
         FIND_ACCOUNT,
-        SUBMIT_MESSAGE} from "./types"
+        SUBMIT_MESSAGE,
+        FETCH_PRODUCTS,
+        FETCH_PRODUCT,
+        CREATE_COMMENT,
+        FETCH_COMMENTS} from "./types"
 
 export const createAccount=formValues=>async(dispatch)=>{
         const response=await axios.post("/createaccount", {formValues});
@@ -42,4 +46,30 @@ export const submitMessage=formValues=>async(dispatch)=>{
         }, 5000))
         .catch(err=>{console.log(err)})
         dispatch({type:SUBMIT_MESSAGE, payload:response})
+}
+
+export const fetchProducts=()=> async(dispatch)=>{
+        const response=await axios.get("/products");
+        dispatch({type:FETCH_PRODUCTS, payload:response.data})
+}
+
+export const fetchProduct=(id)=>async dispatch=>{
+        const response=await axios.get(`/products/${id}`);
+        dispatch({type:FETCH_PRODUCT, payload:response.data})
+}
+
+export const createComment=(formValues, productID)=>async(dispatch)=>{
+        const response=await axios.post("/createcomment", {formValues, productID});
+        dispatch({type:CREATE_COMMENT, payload:response})
+        if (response.data==="ok"){
+                alert("Vas komentar je kreiran")
+                window.location.reload()
+                
+
+        }
+}
+
+export const fetchComments=(id)=> async(dispatch)=>{
+        const response=await axios.get(`/comments/${id}`);
+        dispatch({type:FETCH_COMMENTS, payload:response.data})
 }

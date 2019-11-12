@@ -9,8 +9,8 @@ import Recepies from "./pages/Recipes"
 import CreateAccount from "./pages/CreateAccount"
 import Login from "./pages/Login"
 import Contact from "./pages/Contact"
-import News from "./pages/News"
 import Cart from "./pages/Cart"
+import Specification from "./pages/Specification"
 
 class App extends React.Component{
     render(){
@@ -22,11 +22,11 @@ class App extends React.Component{
                         <Route path="/about" exact component={About} />
                         <Route path="/products" exact component={Products} />
                         <Route path="/recipes" exact component={Recepies} />
-                        <Route path="/news" exact component={News} />
                         <Route path="/createaccount" exact component={CreateAccount} />
                         <Route path="/login" exact component={Login} />
                         <Route path="/contact" exact component={Contact} />
                         <Route path="/cart" exact component={Cart} />
+                        <Route path="/products/specification:name/:id" component={Specification}/>
                     </Switch>
                 </Router>
             </div>
