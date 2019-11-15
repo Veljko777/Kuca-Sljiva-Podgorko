@@ -185,7 +185,58 @@ app.post("/contactus", (req,res)=>{
         from:"",
         to:"veljkorankovic@gmail.com",
         subject:query3,      
-        html:"<h2>"+query3+"</h2>"+ "<p>"+query4+"</p>"+"<br><h3>"+query1+"</h3>"+"<h4>Email pošiljaoca: "+query2+"</h4>"+"<h4>Telefon: "+query5
+        html:"<h2>"+query3+"</h2>"+ "<p>"+query4+"</p>"+"<br><h3>"+query1+"</h3>"+"<h4>Email pošiljaoca: "+query2+"</h4>"+"<h4>Telefon: "+query5+"</h4>"
+        }
+    transporter.sendMail(mailOptions,(err,info)=>{
+        if(err)
+        console.log(err)
+        else
+        console.log(info)
+    })
+    res.send("poruka poslata")
+})
+
+
+app.post("/createorder", (req,res)=>{
+    const rawdata=req.body.data
+    var data=""
+    rawdata.forEach(element => {
+           let name=element.name
+           let qty=element.qty
+           let price=element.price
+        var alldata="Naziv: "+name+" Kolicina: "+qty+" Cena: "+price+" din."
+        data+="<p>"+alldata+"</p>"
+    });
+    console.log(data)
+    const query1=req.body.formValues.name
+
+    const query2=req.body.formValues.address
+    const query3=req.body.formValues.postal_code
+    const query4=req.body.formValues.city
+    if(req.body.formValues.phone===undefined){
+        var query5=" "
+    }else{
+        var query5=req.body.formValues.phone
+    }
+    const query6=req.body.formValues.email
+    const query7=req.body.formValues.description
+    
+    
+    const transporter=nodemailer.createTransport({
+        service:"gmail",
+        secure:false,
+        port:25,
+        auth:{
+            user:"",
+            pass:""
+            },
+        rejectUnauthorized:false
+        })
+    const mailOptions={
+        from:"",
+        to:"veljkorankovic@gmail.com",
+        subject:"PORUDZBINA",      
+        html:"<h2>Poruzbina</h2><br>"+data+"<h4>Ime: "+query1+"</h4><h4>Adresa: "+query2+"</h4><h4>Postanski broj: "+query3+"</h4><h4>Grad: "+query4+"</h4><h4>Telefon: "+query5+"</h4><h4>Email: "+query6+"</h4><h3>Napomena:"+query7
         }
     transporter.sendMail(mailOptions,(err,info)=>{
         if(err)

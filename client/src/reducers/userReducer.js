@@ -1,4 +1,4 @@
-import {SIGN_IN, CREATE_ACCOUNT, FIND_ACCOUNT, SUBMIT_MESSAGE} from "../actions/types"
+import {SIGN_IN, CREATE_ACCOUNT, FIND_ACCOUNT, SUBMIT_MESSAGE, CREATE_ORDER} from "../actions/types"
 
 const INITAL_STATE={
     isSignedIn: null,
@@ -17,6 +17,8 @@ export default(state=INITAL_STATE, action)=>{
         case FIND_ACCOUNT:
             return{...state, auth:action.payload.auth, token:action.payload.token}
         case SUBMIT_MESSAGE:
+            return{...state}
+        case CREATE_ORDER:
             return{...state}
         default:
             return state;

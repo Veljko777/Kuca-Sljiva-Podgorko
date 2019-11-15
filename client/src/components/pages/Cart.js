@@ -2,9 +2,64 @@ import React from "react";
 import {Link} from  "react-router-dom"
 import Header from "./header"
 import Footer from "./footer"
+import CreateOrderForm from "./forms/createOrderForm"
+import {createOrder}from "../../actions"
+import {connect}from "react-redux"
 
 class Cart extends React.Component{
-    render(){
+    onSubmit=(formValues)=>{
+        const data=JSON.parse(localStorage.getItem("cart"))
+        this.props.createOrder(formValues, data)
+        
+    }
+    renderHelper(){
+        const CART = {
+            KEY: 'cart',
+            contents: []
+        }
+         function sync(){
+            let _cart = JSON.stringify(CART.contents);
+            localStorage.setItem(CART.KEY, _cart);
+        }
+         function init(){
+            let _contents = localStorage.getItem(CART.KEY);
+            if(_contents){
+                CART.contents = JSON.parse(_contents);
+            }else{
+                //dummy test data
+                CART.contents = [];
+                sync();
+            }
+        }
+        const data=JSON.parse(localStorage.getItem("cart"))
+        if(data=== null ){
+            return <div className="pb-5">Nemate artikle u korpi</div>
+        }else{
+            return data.map(item=>{
+                let total=item.price*item.qty
+                return(
+                    <div key={item.id} className="cart-item mb-3">
+                        <h3>{item.name}</h3>
+                        <h6>Količina: {item.qty} kom.</h6>
+                        <h6>Cena: {item.price} din.</h6>
+                        <br></br>
+                        <h5>Ukupno: {total} din.</h5>
+                        <button 
+                        onClick={()=>{
+                            init()
+                            let selected=data.indexOf(item)
+                            CART.contents.splice(selected, 1)
+                            sync()
+                            window.location.reload()                     
+                            }} 
+                        id="cancel-cart-btn" className="btn btn-outline-danger btn-sm">X</button>
+                    </div>
+                )
+            })
+        }
+    }
+    render(){  
+
         return (
             <div className="wrapper">
                 <Header/>
@@ -29,7 +84,7 @@ class Cart extends React.Component{
                                 <Link className="nav-link" to="/products">Proizvodi</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/recipes">Recepti</Link>
+                                <Link className="nav-link" to="/news">Novosti</Link>
                             </li>
                             <li className="nav-item ">
                                 <Link className="nav-link" to="/contact">Kontakt</Link>
@@ -42,28 +97,15 @@ class Cart extends React.Component{
                    </div>
                    <hr className="m-0 p-0"></hr>
                    <div className="body1 container mb-5 pt-5">
-                   <div className="">
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
-                    <h1>Cart</h1>
+                   <div className="row ml-3 mr-3">
+                       <div className="col-md-6">
+                       {this.renderHelper()}
+                       </div>
+                       <div className="col-md-6 pl-5 pr-5 pb-5">
+                           <h2>Podaci za porudžbinu:</h2>
+                            <CreateOrderForm onSubmit={this.onSubmit}/>
+                       </div>
+                    
                     </div>
                </div>
                <Footer/>
@@ -72,4 +114,4 @@ class Cart extends React.Component{
     }
 }
 
-export default Cart;
+export default connect(null, {createOrder})(Cart)

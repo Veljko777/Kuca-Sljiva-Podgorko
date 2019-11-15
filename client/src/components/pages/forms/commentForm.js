@@ -39,7 +39,7 @@ class CommentForm extends React.Component{
                     <Field name="name" component={this.renderName} label="Vaša ime:"/>
                     <Field name="raiting" component={this.renderRaiting} label="Vaša ocena od 1-5:"/>
                     <Field name="description" component={this.renderDescription} label="Komentar:"/>
-                    <button className="button mt-2">Submit</button>
+                    <button className="button mt-2">Postavi komentar</button>
                 </form>
             </div>
         )

@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from "./forms/loginForm";
 import {findAccount} from "../../actions/index";
 import {connect} from "react-redux";
-import Header from "./header";
+import Header,{cartNum} from "./header";
 import Footer from "./footer";
 import {Link} from "react-router-dom";
 
@@ -37,14 +37,14 @@ class Login extends React.Component{
                                 <Link className="nav-link" to="/products">Proizvodi</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/recipes">Recepti</Link>
+                                <Link className="nav-link" to="/news">Novosti</Link>
                             </li>
                             <li className="nav-item ">
                                 <Link className="nav-link" to="/contact">Kontakt</Link>
                             </li>
                             </ul>
                         </div>
-                        <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x shop-icon"></i></Link>
+                        <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x shop-icon">{cartNum()}</i></Link>
                     </nav>
                 </div>
                 <hr className="m-0 p-0"></hr>

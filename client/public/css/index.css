@@ -14,19 +14,24 @@ body{
     font-family: 'EB Garamond', serif;
     color:white;
     min-height: 100%;
-    
-    
-    
 }
+
 a{
     color:#2B32B2;
 }
+
 a:hover{
     text-decoration: none;
 }
+
 hr{
     border:none;
     
+}
+
+.form-control{
+    background-color:rgb(216, 216, 216);
+    border:none;
 }
 
 .body{
@@ -40,6 +45,7 @@ hr{
     border-bottom-right-radius: 0;
     box-shadow: 0px 0px 30px  white;
 }
+
 .body1{
     width: 75%;
     margin:auto;
@@ -55,7 +61,6 @@ hr{
 .logo{
     font-family: 'Lobster', cursive;
     text-shadow:  0px 0px 15px #2B32B2;
-
 }
 .logo a{
     font-size: 3em;
@@ -64,10 +69,10 @@ hr{
     color: white;
     font-weight: 300;
 }
+
 .logo a:hover{
     transition: 0.5s;
     color: #2B32B2;
-
 }
 
 #login-btn{
@@ -94,7 +99,6 @@ hr{
 
 #createaccount-btn{
     color:white;
-    
     margin-top:5px;
     border-radius: 15px;
     padding:3px 10px;
@@ -114,6 +118,7 @@ hr{
     border-radius: 10px;
     padding:3px 10px;
 }
+
 .navbar-dark .navbar-nav .nav-link:hover {
     background-color: white;
     transition:0.5s;
@@ -121,42 +126,42 @@ hr{
     color:#2B32B2;
     font-size:20px;
 }
+
 #active{
     background-color: white;
     box-shadow: 0px 0px 10px white;
     color:#2B32B2;
-    
 }
 
 .shop-icon{
     color:white;
-   
-    
+    position: relative;
     padding:4px;
     padding-right: 8px;
     border-radius: 50%;
     box-shadow: 0px 0px 10px white;
-   
 }
+
 .active-shop-icon{
     color:#2B32B2;
+    position: relative;
     background-color: white;
     padding:4px;
     padding-right: 8px;
     border-radius: 50%;
     box-shadow: 0px 0px 10px white;
-   
 }
 
-
-
-
-
-
-
-
-
-
+.cart-num{
+    position: absolute;
+    top:50%;
+    left:90%;
+    color: #2B32B2;
+    border-radius: 75px;
+    font-size: 15px;
+    padding: 3px 6px;
+    background-color: white;
+}
 
 .submit-button{
     background-color: white;
@@ -173,32 +178,30 @@ hr{
     color:white;
 }
 
-
 .footer {
     padding-top: 5px;
     color:#ffffff;
     background: #1488CC;  
     font-family: 'EB Garamond', serif;
     list-style-type: none;
-  
-    
 }
+
 .footerend {
     background: #1488CC;  
     font-family: 'EB Garamond', serif;
 }
+
 .footer p{
     color:#ffffff;
     font-size: 12px;
     margin-top: 20px;
-    
 }
+
 #footer-logo{
     width: 200px;
 }
 
 .footer li{
-    
     font-size:16px;
     display: block;
     padding:0 20px;
@@ -208,6 +211,7 @@ hr{
     display:none;
     opacity:0;
 }
+
 .messageinfo{
     display:block;
     z-index: 1;
@@ -223,10 +227,12 @@ hr{
     font-size:20px;
     animation: fadein 3s;
 }
+
 .name-input{
     display:none;
     opacity:0;
 }
+
 .name-input-message{
     display:block;
     z-index: 1;
@@ -258,51 +264,52 @@ hr{
     box-shadow: 1px 1px 10px grey;
 }
 
-
 .aboutpage{
     padding:15px;
     border-radius: 25px;
     box-shadow: 0px 0px 3px white;
     margin: auto;
     text-align: justify;
-    
 }
 
 .aboutpage h2{
     text-align: center;
-
     text-indent: 0px;
     text-shadow: 0px 0px 20px white;
 }
+
 .aboutpage img{
     text-align: center;
     text-indent: 0px;
     width: 100px;
 }
-.aboutpage p{
 
+.aboutpage p{
     text-indent: 30px;
 }
+
 .aboutpage-side img{
- width: 100%;
- max-height: 147px;
- margin-bottom: 40px;
- border-radius: 25px;
- box-shadow:0px 0px 5px white;
- object-fit: cover;
+    width: 100%;
+    max-height: 147px;
+    margin-bottom: 40px;
+    border-radius: 25px;
+    box-shadow:0px 0px 5px white;
+    object-fit: cover;
 }
 
 .product-link h5{
-color:white;
+    color:white;
 }
+
 .product-link img:hover{
-box-shadow:0px 0px 10px white;
-transform: scale(1.05);
-transition: 0.5s;
+    box-shadow:0px 0px 10px white;
+    transform: scale(1.05);
+    transition: 0.5s;
 }
+
 .product-link h5:hover{
-text-shadow:0px 0px 10px white;
-transition: 0.5s;
+    text-shadow:0px 0px 10px white;
+    transition: 0.5s;
 }
 
 .button{
@@ -332,29 +339,27 @@ transition: 0.5s;
     display:-moz-inline-grid;
     display:-ms-inline-grid;
     grid-template-columns: auto auto auto auto;
-
-
 }
 
 .grid-card{
     box-shadow: 0px 0px 20px white;
     max-width: 226px;
-    min-height: 400px;
+    min-height: 320px;
     border-radius: 15px;
     color:white;
     padding: 5%;
-    margin:15px;
- 
+    margin:40px 30px;
 }
+
 .card-img{
     border-radius: 15px;
     width: 100%;
     max-height: 132px; 
     margin-bottom: 10px;   
 }
+
 .grid-card h5{
     height: 60px;
-    
 }
 
 .product-specification{
@@ -364,10 +369,12 @@ transition: 0.5s;
     border-radius: 15px;
     margin:auto;
 }
+
 .product-specification img{
     width:100%;
     border-radius: 15px;
 }
+
 .product-specification p{
     margin: 0px;
 }
@@ -378,6 +385,43 @@ transition: 0.5s;
     margin-bottom: 20px;
     border-radius: 15px;
 }
+
+.news{
+    box-shadow: 0px 0px 15px white;
+    padding:30px;
+    border-radius: 15px;
+    background: #1488CC;  
+    background: -webkit-linear-gradient(to bottom, #2B32B2, #1488CC); 
+    background: linear-gradient(to bottom, #2B32B2, #1488CC);
+}
+
+.gallery{
+    height: 230px;
+    margin:auto;
+ }
+
+ .gallery img{
+    border-radius: 15px;
+    box-sizing: border-box;
+    object-fit: cover;
+    height: 215px;
+    width: 215px;
+    margin:10px;
+ }
+
+.cart-item{
+    position: relative;
+    box-shadow: 0px 0px 10px white;
+    border-radius: 15px;
+    padding:20px;
+}
+
+#cancel-cart-btn{
+    position: absolute;
+    top:40%;
+    left:85%;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .grid-container{
@@ -386,9 +430,11 @@ transition: 0.5s;
         width: 80%;
         margin-left:10%;
     }
+
     .aboutpage-side{
         display: none;
     }
+
     .messageinfo{
         display:block;
         z-index: 1;
@@ -404,6 +450,7 @@ transition: 0.5s;
         font-size:14px;
         animation: fadein 3s;
     }
+
     .name-input-message{
         display:block;
         z-index: 1;
@@ -418,7 +465,6 @@ transition: 0.5s;
         font-size:14px;
         animation: fadein 2s;
     }
-    
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -426,9 +472,7 @@ transition: 0.5s;
     .grid-container{
         display:inline-grid;
         grid-template-columns: auto auto;
-          
     }
-
     
     .messageinfo{
         display:block;
@@ -445,6 +489,7 @@ transition: 0.5s;
         font-size:20px;
         animation: fadein 3s;
     }
+
     .name-input-message{
         display:block;
         z-index: 1;
@@ -460,6 +505,7 @@ transition: 0.5s;
         animation: fadein 2s;
     }
 }
+
 @media only screen and (max-width:768px){
     .aboutpage-side{
         display: none;
@@ -471,7 +517,6 @@ transition: 0.5s;
     .grid-container{
         display:inline-grid;
         grid-template-columns: auto auto auto ;
-          
     }
     
     .messageinfo{
@@ -489,6 +534,7 @@ transition: 0.5s;
         font-size:20px;
         animation: fadein 3s;
     }
+
     .name-input-message{
         display:block;
         z-index: 1;
@@ -510,7 +556,6 @@ transition: 0.5s;
     .grid-container{
         display:inline-grid;
         grid-template-columns: auto auto auto;
-          
     }
 
     .messageinfo{
@@ -528,6 +573,7 @@ transition: 0.5s;
         font-size:20px;
         animation: fadein 3s;
     }
+
     .name-input-message{
         display:block;
         z-index: 1;
@@ -549,8 +595,8 @@ transition: 0.5s;
     .grid-container{
         display:inline-grid;
         grid-template-columns: auto auto auto auto;
-          
     }
+
     .messageinfo{
         display:block;
         z-index: 1;
@@ -566,6 +612,7 @@ transition: 0.5s;
         font-size:20px;
         animation: fadein 3s;
     }
+    
     .name-input-message{
         display:block;
         z-index: 1;

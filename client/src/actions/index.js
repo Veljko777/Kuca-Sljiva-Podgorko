@@ -7,7 +7,8 @@ import {SIGN_IN,
         FETCH_PRODUCTS,
         FETCH_PRODUCT,
         CREATE_COMMENT,
-        FETCH_COMMENTS} from "./types"
+        FETCH_COMMENTS,
+        CREATE_ORDER} from "./types"
 
 export const createAccount=formValues=>async(dispatch)=>{
         const response=await axios.post("/createaccount", {formValues});
@@ -64,12 +65,22 @@ export const createComment=(formValues, productID)=>async(dispatch)=>{
         if (response.data==="ok"){
                 alert("Vas komentar je kreiran")
                 window.location.reload()
-                
-
         }
 }
 
 export const fetchComments=(id)=> async(dispatch)=>{
         const response=await axios.get(`/comments/${id}`);
         dispatch({type:FETCH_COMMENTS, payload:response.data})
+}
+
+export const createOrder=(formValues,data)=>async(dispatch)=>{
+        const response=await axios.post("/createorder", {formValues,data});
+        dispatch({type:CREATE_ORDER, payload:response})
+        if(response.data==="poruka poslata"){
+                alert("Porudzbina je poslata")
+                window.location.reload()
+                localStorage.removeItem("cart")
+        }else{
+                alert("Nesto nije u redu sa serverom")
+        }
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom"
-import Header from "./header"
+import Header,{cartNum} from "./header"
 import Footer from "./footer"
 import {fetchProducts} from "../../actions/index"
 import {connect} from "react-redux";
 
 class Products extends React.Component{
+    
     componentDidMount(){
         this.props.fetchProducts();
     }
@@ -18,12 +19,8 @@ class Products extends React.Component{
                             <img className="card-img" src={product.image_src} alt=""></img>
                             <h5 className="text-center">{product.name}</h5>
                         </Link>
-                        <div className="text-left">
-                            <p className="m-0">{product.pack}</p>
-                            <p className="m-0">{product.package}</p>
-                            <p className="m-0 mb-5">Cena: {product.price} din.</p>
-                        </div>
-                        <button onClick={()=>console.log(product)} className=" button mb-2"><i className="fa fa-shopping-cart fa-lg "></i> Dodaj u korpu</button>
+
+                        <Link className="product-link" to={`/products/specification${product.name}/${product.productID}`}><button  className=" button mb-2">Detaljnije</button></Link>
                     </div>
                 </div>
             )}
@@ -64,7 +61,7 @@ class Products extends React.Component{
                                 <Link className="nav-link" id="active" to="/products">Proizvodi</Link>
                             </li>
                             <li className="nav-item ">
-                                <Link className="nav-link" to="/recipes">Recepti</Link>
+                                <Link className="nav-link" to="/news">Novosti</Link>
                             </li>
                             <li className="nav-item ">
                                 <Link className="nav-link" to="/contact">Kontakt</Link>
@@ -72,7 +69,7 @@ class Products extends React.Component{
                             </ul>
                             
                        </div>
-                       <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x shop-icon"></i></Link>
+                       <Link className=""  to="/cart"><i className="fa fa-shopping-cart fa-2x shop-icon">{cartNum()}</i></Link>
                    </nav>
                    </div>
                    <hr className="m-0 p-0"></hr>

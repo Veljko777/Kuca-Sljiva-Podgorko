@@ -3,6 +3,23 @@ import {Link} from  "react-router-dom"
 import {connect} from "react-redux"
 import {signIn} from "../../actions"
 
+export const cartNum=()=>{
+    let value=0
+    const data=JSON.parse(localStorage.getItem("cart"))
+    if(data!== null){
+        data.map(item=>{
+           return value++
+        })
+        if (value!==0){
+            return <span className="cart-num" >{value}</span>
+        }else {
+            return null
+        }
+    }else{
+        return null
+    } 
+}
+
 class Header extends React.Component{
     componentDidMount(){
         const token=localStorage.getItem("token")
